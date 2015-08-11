@@ -1,0 +1,62 @@
+{
+    "apiVersion": "2.3.0",
+    "authUser": "demouser",
+    "authPassword": "demopassword",
+    "defaultVersion": "1.0",
+    "name": "IDOL OnDemand Text Index Service",
+    "port": 5001,
+    "url": "http://idol-service.15.126.235.213.xip.io/",
+    "services": [{
+        "id": "47c6bff8-c653-4812-89f8-ee9a9b6c3d53",
+        "bindable": true,
+        "name": "IDOL-Text-Index-Service",
+        "version": "1.0",
+        "description": "IDOL OnDemand Text Index Service - creates and binds to a text index",
+        "metadata": {
+            "providerDisplayName": "Hewlett Packard Enterprise",
+            "tags": [ "IDOL", "Data" ]
+        },
+        "plans": [{
+            "name": "standard-flavor",
+            "id": "standard",
+            "description": "A standard configuration that can accept up to 250,000 documents",
+            "public": true,
+            "free": true
+            },
+            {
+            "name": "explorer-flavor",
+            "id": "explorer",
+            "description": "An explorer configuration that can accept up to 25,000 documents.",
+            "public": true,
+            "free": false
+			},
+			{
+			 "name": "categorization-flavor",
+            "id": "categorization",
+            "description": "An categorization index is used to categorise documents based on boolean restrictions and can be used to define up to 250,000 categories.",
+            "public": true,
+            "free": false
+			},
+			{
+			"name": "querymanipulation-flavor",
+            "id": "querymanipulation",
+            "description": "An query manipulation index is used to store promotions and other query promotions to be applied as part of a query profile.",
+            "public": true,
+            "free": false
+			},
+			{
+			"name": "custom_fields-flavor",
+            "id": "custom_fields",
+            "description": "A custom_field configuration that can accept up to 250,000 documents",
+            "public": true,
+            "free": false
+			}]
+        }],
+		
+    "database": {
+        "enabled": true,
+        "allowOrphanedBindings": false,
+        "databaseFile": "./leveldb",
+        "encryptionKey": "!!changeme!!"
+    }
+}

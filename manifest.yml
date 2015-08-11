@@ -1,0 +1,5 @@
+applications:
+- name: idol-service
+  memory: 256m
+  env:
+    APIKEY: 9dd2c020-6edd-45f7-b93b-28e3ac9279b3

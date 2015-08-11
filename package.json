@@ -1,0 +1,13 @@
+{
+  "name": "idol-service-broker",
+  "version": "0.2.0",
+  "description": "IDOL OnDemand Broker to provision unstructured text indexes",
+  "main": "server.js",
+  "engines":{
+    "node": "0.10.x"
+	},
+  "dependencies": {
+   "cf-services-connector":"",
+   "request":""
+  }
+}
