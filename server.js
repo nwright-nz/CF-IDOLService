@@ -21,7 +21,7 @@
 var Broker = require('cf-services-connector');
 var Config = require('./config/idol-service');
 
-var https = require('https');
+var request = require('request');
 var broker = new Broker(Config);
 var apiKey = process.env.APIKEY;
 var plan = "";
@@ -29,18 +29,9 @@ var plan = "";
 broker.start();
 
 broker.on('provision', function (req, next) {
-    //create the text index - How to get the params from the service plan?
+   
 	plan = req.params.plan_id;
-	
-	var options = {
-	host: "api.idolondemand.com",
-	port: 443,
-	path: '/1/api/sync/createtextindex/v1?index=test&flavor=' + plan + '&apikey=' + apiKey ,
-	method: 'POST'
-	};
-	
-	console.log(options);
-	
+
 	request.post('https://api.idolondemand.com/1/api/sync/createtextindex/v1', {form:{apikey:apiKey, index:'test', flavor:plan}},
 	function(error, response, body){
     if(error) {
