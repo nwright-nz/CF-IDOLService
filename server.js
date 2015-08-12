@@ -20,19 +20,19 @@
 
 var Broker = require('cf-services-connector');
 var Config = require('./config/idol-service');
-
 var request = require('request');
+var random = require('randomstring')
 var broker = new Broker(Config);
 var apiKey = process.env.APIKEY;
 var plan = "";
-
+var index = "";
 broker.start();
 
 broker.on('provision', function (req, next) {
-   
+    //how do i accept parameters? for the name of the index / the description?
 	plan = req.params.plan_id;
-
-	request.post('https://api.idolondemand.com/1/api/sync/createtextindex/v1', {form:{apikey:apiKey, index:'test', flavor:plan}},
+    index = plan + "-" + random.generate(4);
+	request.post('https://api.idolondemand.com/1/api/sync/createtextindex/v1', {form:{apikey:apiKey, index: index, flavor:plan}},
 	function(error, response, body){
     if(error) {
         console.log(error);
@@ -43,21 +43,41 @@ broker.on('provision', function (req, next) {
 	
 
     var reply = { apiKey : plan };
-    console.log("API KEY is: " + apiKey);
-	console.log("Plan is " + plan);
+    //console.log("API KEY is: " + apiKey);
+	//console.log("Plan is " + plan);
     next(reply);
 });
 
 broker.on('unprovision', function (req, next) {
+    var confCode = "";
+    request.post('https://api.idolondemand.com/1/api/sync/deletetextindex/v1', {form:{apikey:apiKey, index: index}},
+        function(error, response, body){
+            if(error) {
+                console.log(error);
+            } else {
+                console.log(response.statusCode, body);
+                var parsedBody = JSON.parse(body);
+                confCode = parsedBody.confirm
+                request.post('https://api.idolondemand.com/1/api/sync/deletetextindex/v1', {form:{apikey:apiKey, index: index, confirm:confCode}},
+                    function(error, response, body){
+                        if(error) {
+                            console.log(error);
+                        } else {
+                        }
+
+            });
+        }});
+
     next();
 });
 
 broker.on('bind', function (req, next) {
+    // What do we need for a bind? Return the index name, and the API Key?
     var reply = {};
 
     reply.credentials = {
-        echo: 'echo',
-        anotherEcho: 'anotherEcho',
+        index: index,
+        apikey: apiKey,
     };
     next(reply);
 });
