@@ -5,32 +5,32 @@ System service to dynamically provision, bind and deprovision IDOL OnDemand Unst
 This CloudFoundry service utilises the Stackato open source service broker (https://github.com/ActiveState/cf-services-connector-nodejs) to create a new service that provisions a new unstructured text index in IDOL OnDemand.
 The following operations are included:
 
-Provision - Creates a new text index. The flavor of the text index is specified by the service plan
-Bind - passes the index name and api key to make available to the bound application
-Deprovision - Deletes the text index from IDOL OnDemand
+Provision - Creates a new text index. The flavor of the text index is specified by the service plan<br>
+Bind - passes the index name and api key to make available to the bound application<br>
+Deprovision - Deletes the text index from IDOL OnDemand<br>
 
 This is a basic implementation to help test the use of IDOL OnDemand text indexes in an application.
 
 #Install Service
-To install the service :
-Edit the manifest.yml file and include your IDOL OnDemand API key
-Edit the config\idol-service.json file to include the url of your cloud foundry instance (this has been tested on Helion Development Platform so should have work fine on native stackato implementations also)
+To install the service :<br>
+Edit the manifest.yml file and include your IDOL OnDemand API key<br>
+Edit the config\idol-service.json file to include the url of your cloud foundry instance (this has been tested on Helion Development Platform so should have work fine on native stackato implementations also)<br>
 
 Deploy the application to your platform.
 
 #Create Service Broker
-Once the application is deployed, a new service broker needs to be created by running the following command:
-create-service-broker --username demouser --password demopassword --url http://idol-service.YOUR-URL-HERE IDOL-ServiceBroker --public
+Once the application is deployed, a new service broker needs to be created by running the following command:<br>
+create-service-broker --username demouser --password demopassword --url http://idol-service.YOUR-URL-HERE IDOL-ServiceBroker --public<br>
 
 This will create the service plans, and make them public.
 
 #Create service instance
-To create a service instance run :
-create-service IDOL-Text-Index-Service <name of the service> <application you wish to bind - optional>
+To create a service instance run :<br>
+create-service IDOL-Text-Index-Service <name of the service> <application you wish to bind - optional> <br>
 
-Select the appropriate flavor for the text index (for flavor options see : https://www.idolondemand.com/developer/docs/IndexFlavors.html)
+Select the appropriate flavor for the text index (for flavor options see :<br> https://www.idolondemand.com/developer/docs/IndexFlavors.html)
 
-The service will be created, the text index will be created (the name of this will be the flavor plus a 4 character random string). The binding will make the credentials available to the application.
+The service will be created, the text index will be created (the name of this will be the flavor plus a 4 character random string). The binding will make the credentials available to the application. 
 
 #Using service
 
