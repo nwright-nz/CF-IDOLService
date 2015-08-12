@@ -5,7 +5,7 @@
     "defaultVersion": "1.0",
     "name": "IDOL OnDemand Text Index Service",
     "port": 5001,
-    "url": "http://idol-service.15.126.235.213.xip.io/",
+    "url": "http://idol-service.YOUR-URL-HERE",
     "services": [{
         "id": "47c6bff8-c653-4812-89f8-ee9a9b6c3d53",
         "bindable": true,
@@ -13,7 +13,7 @@
         "version": "1.0",
         "description": "IDOL OnDemand Text Index Service - creates and binds to a text index",
         "metadata": {
-            "providerDisplayName": "Hewlett Packard Enterprise",
+            "providerDisplayName": "IDOL Service",
             "tags": [ "IDOL", "Data" ]
         },
         "plans": [{
